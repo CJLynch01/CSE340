@@ -1,6 +1,62 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+:root {
+  --blueish: #06b5d6;
+  --white: #fff;
+}
+
+*{
   box-sizing: border-box;
+}
+
+
+
+
+header, nav, footer, .container {
+  background-color: var(--white);
+  margin: 15px;
+  padding: 20px;
+}
+
+header, nav, .container {
+  margin-bottom: 0;
+}
+
+nav, .container, footer {
+  margin-top: 0;
+}
+
+nav, .container {
+  border-left:  5px solid var(--blueish);
+  border-right: 5px solid var(--blueish);
+}
+
+/* Header Styling */
+header {
+  border-top: 5px solid var(--blueish);
+  border-left:  5px solid var(--blueish);
+  border-right: 5px solid var(--blueish);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+
+/* Navigation Styling */
+
+
+/* Body Styling */
+body {
+  background-image: url("../images/site/checkerboard.jpg");
+}
+
+.vehicle {
+  display: flex;
+  justify-content: center;
+}
+
+/* Footer Styling */
+footer {
+  border-bottom: 5px solid var(--blueish);
+  border-left:  5px solid var(--blueish);
+  border-right: 5px solid var(--blueish);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
