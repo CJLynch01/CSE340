@@ -76,7 +76,7 @@ nav ul li {
 }
 
 .text {
-  padding: none;
+  padding: 0;
   color: var(--blueish);
   line-height: 2px;
   padding-bottom: 10px;
@@ -315,7 +315,7 @@ nav ul li {
   }
 
   .text {
-    padding: none;
+    padding: 0;
     color: var(--blueish);
     line-height: 2px;
     padding-bottom: 10px;
