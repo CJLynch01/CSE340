@@ -1,6 +1,22 @@
 :root {
+
+  /* Colors */
   --blueish: #06b5d6;
   --white: #fff;
+  --nav: #242332;
+  --black: #000000;
+  --border: #909090;
+  --p: #0033FF;
+  --transparent: rgba(255, 255, 255, .8);
+
+/* Fonts */
+
+  --header2: "Roboto", sans-serif;
+  --header3: "Poppins", "Sedan SC", sans-serif;
+  --navi: "Raleway", sans-serif;
+  --para: "Rubik", sans-serif;
+  --sale: "Oswald", sans-serif;
+  --footer: "Rubik", sans-serif;
 }
 
 *{
@@ -12,7 +28,7 @@
 
 header, nav, footer, .container {
   background-color: var(--white);
-  margin: 15px;
+  margin: 30px;
   padding: 20px;
 }
 
@@ -31,6 +47,7 @@ nav, .container {
 
 /* Header Styling */
 header {
+  display: flex;
   border-top: 5px solid var(--blueish);
   border-left:  5px solid var(--blueish);
   border-right: 5px solid var(--blueish);
@@ -38,18 +55,202 @@ header {
   border-top-right-radius: 10px;
 }
 
+#tools {
+  margin-left: auto;
+}
+
+.siteName a {
+  text-decoration: none;
+  color: var(--black);
+  font-size: large;
+  font-weight: 500;
+  font-family: var(--header2);
+}
+
+#tools a {
+  text-decoration: none;
+  color: var(--black);
+  text-transform: uppercase;
+  font-size: x-small;
+  font-family: var(--header3);
+}
+
 
 /* Navigation Styling */
+nav ul {
+  display: flex;
+  background-color: var(--nav);
+  color: var(--white);
+  justify-content: space-around;
+  padding: 0;
+}
 
+nav ul li {
+  list-style-type: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: var(--navi);
+}
 
 /* Body Styling */
 body {
   background-image: url("../images/site/checkerboard.jpg");
 }
 
-.vehicle {
-  display: flex;
-  justify-content: center;
+.transparent {
+  position: absolute;
+  background-color: var(--transparent);
+  top: 350px;
+  left: 100px;
+}
+
+.container h2 {
+  font-family: var(--header2);
+}
+
+.text {
+  padding: none;
+  color: var(--blueish);
+  line-height: 2px;
+  padding-bottom: 10px;
+}
+
+.text h2 {
+  font-family: var(--sale);
+}
+
+.text h3 {
+  font-family: var(--sale);
+}
+
+.owntoday {
+  background-color: var(--blueish);
+  color: var(--black);
+  text-align: center;
+  padding: 3px;
+  margin: 7px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: var(--sale);
+
+}
+
+.vehicle img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+/* Grid in Body */
+.information {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto;
+  grid-column-gap: 10px;
+}
+
+.title1 {
+  grid-column: 1/2;
+  grid-row: 1;
+  margin-bottom: 30px;
+  font-size: larger;
+  font-weight: bold;
+  font-family: var(--header3);
+}
+
+.title2 {
+  grid-column: 3/4;
+  grid-row: 1;
+  margin-bottom: 30px;
+  font-size: larger;
+  font-weight: bold;
+  font-family: var(--header3);
+
+}
+
+.pic1c1 {
+  grid-column: 1;
+  grid-row: 2;
+  background-color: var(--blueish);
+  border: 1px solid var(--border);
+  text-align: center;
+  padding-top: 20px;
+}
+
+.p1 {
+  grid-column: 1;
+  grid-row: 3;
+  text-align: center;
+  text-decoration: underline;
+  color: var(--p);
+  font-family: var(--para);
+}
+
+.pic2c2 {
+  grid-column: 2;
+  grid-row: 2;
+  background-color: var(--blueish);
+  border: 1px solid var(--border);
+  text-align: center;
+  padding-top: 20px;
+}
+
+.p2 {
+  grid-column: 2;
+  grid-row: 3;
+  text-align: center;
+  text-decoration: underline;
+  color: var(--p);
+  font-family: var(--para);
+}
+
+.pic3c1 {
+  grid-column: 1;
+  grid-row: 4;
+  background-color: var(--blueish);
+  border: 1px solid var(--border);
+  text-align: center;
+  padding-top: 20px;
+}
+
+.p3 {
+  grid-column: 1;
+  grid-row: 5;
+  text-align: center;
+  text-decoration: underline;
+  color: var(--p);
+  font-family: var(--para);
+}
+
+.pic4c2 {
+  grid-column: 2;
+  grid-row: 4;
+  background-color: var(--blueish);
+  border: 1px solid var(--border);
+  text-align: center;
+  padding-top: 20px;
+}
+
+.p4 {
+  grid-column: 2;
+  grid-row: 5;
+  text-align: center;
+  text-decoration: underline;
+  color: var(--p);
+  font-family: var(--para);
+}
+
+.reviews {
+  grid-column: 3/4;
+  grid-row: 2/5;
+  margin-top: 30px;
+}
+
+.reviews ul li {
+  margin-top: 15px;
+  font-family: var(--para);
 }
 
 /* Footer Styling */
@@ -59,4 +260,5 @@ footer {
   border-right: 5px solid var(--blueish);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  font-family: var(--footer);
 }
