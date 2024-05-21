@@ -241,3 +241,24 @@ VALUES   (
     'White',
     5
   );
+
+-- #4 Modify the "GM Hummer" record to read "a huge interior" 
+-- rather than "small interiors" using a single query. 
+-- Explore the PostgreSQL Replace function Do NOT retype the entire 
+-- description as part of the query.. It needs to be part of an Update 
+-- query as shown in the code examples of the SQL Reading - Read Ch. 1, section 3.
+
+UPDATE inventory
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_id = 10;
+
+-- #6 Update all records in the inventory table to add "/vehicles"
+-- to the middle of the file path in the inv_image and inv_thumbnail 
+-- columns using a single query. This reference may prove helpful
+-- - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-replace/. 
+-- When done the path for both inv_image and inv_thumbnail should resemble this example: /images/vehicles/a-car-name.jpg
+
+SELECT
+	REPLACE(inv_image, '/images', '/images/vehicles'),
+	REPLACE(inv_thumbnail, '/images', '/images/vehicles')
+FROM inventory
