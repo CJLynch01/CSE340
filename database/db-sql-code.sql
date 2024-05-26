@@ -1,8 +1,8 @@
-CREATE TYPE public.sample AS ENUM
+CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
-ALTER TYPE public.sample
-    OWNER TO cse340;
+ALTER TYPE public.account_type
+    OWNER TO newcse340_2t6h_user;
 
 -- Table structure for table 'classification'
 
@@ -261,4 +261,4 @@ WHERE inv_id = 10;
 SELECT
 	REPLACE(inv_image, '/images', '/images/vehicles'),
 	REPLACE(inv_thumbnail, '/images', '/images/vehicles')
-FROM inventory
+FROM inventory;
