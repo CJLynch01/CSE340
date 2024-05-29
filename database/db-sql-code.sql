@@ -258,7 +258,6 @@ WHERE inv_id = 10;
 -- - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-replace/. 
 -- When done the path for both inv_image and inv_thumbnail should resemble this example: /images/vehicles/a-car-name.jpg
 
-SELECT
-	REPLACE(inv_image, '/images', '/images/vehicles'),
-	REPLACE(inv_thumbnail, '/images', '/images/vehicles')
-FROM inventory;
+UPDATE inventory
+	SET inv_image = REPLACE(inv_image, '/images', '/images/vehicles'),
+		  inv_thumbnail = REPLACE(inv_thumbnail, '/images', '/images/vehicles');
