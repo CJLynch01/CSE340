@@ -21,6 +21,7 @@
 
 /* ----------MOBILE VIEW------------ */
 
+/* Home Page */
 
 /* Header Styling */
 header {
@@ -226,27 +227,71 @@ nav ul li {
     font-family: var(--footer);
   }
 
+/* Vehicle Inventory Search */
+
+#inv-display {
+  list-style-type: none;
+  text-align: center;
+  background-color: var(--blueish);
+}
+
+#inv-display li{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.namePrice h2{
+  padding: 0;
+  margin: 0;
+}
+
+.namePrice hr {
+  display: none;
+}
+
+/* Single Vehicle View */
+
+#vehicle-display {
+  background-color: var(--blueish);
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#vehicle-display h2 {
+  font-size: xx-large;
+}
+
+#vehicle-display h3 {
+  opacity: 0.75;
+  font-size: x-large;
+  text-decoration: underline;
+}
+
+#vehicle-display div p {
+  font-size: large;
+}
 
 /* -------------LARGE VIEW----------- */
 
 
 @media (min-width: 600px) {
 
-  header, nav, footer, .container {
+  header, nav, footer, main {
     background-color: var(--white);
     margin: 30px;
     padding: 20px;
   }
 
-  header, nav, .container {
+  header, nav, main {
     margin-bottom: 0;
   }
 
-  nav, .container, footer {
+  nav, footer, main {
     margin-top: 0;
   }
 
-  nav, .container {
+  nav, main {
     border-left:  5px solid var(--blueish);
     border-right: 5px solid var(--blueish);
   }
@@ -470,4 +515,93 @@ nav ul li {
     border-bottom-right-radius: 10px;
     font-family: var(--footer);
   }
+
+
+/* Vehicle Inventory Search */
+
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  text-align: center;
+  background-color: var(--white);
+}
+
+#inv-display li{
+  padding: 15px;
+  background-color: var(--blueish);
+  margin: 5px;
+  height: 200px;
+  width: 250px;
+}
+
+.namePrice h2{
+  padding: 0;
+  margin: 0;
+}
+
+#inv-display li img {
+  height: 125px;
+  width: 200px;
+}
+
+/* Single Vehicle View */
+
+#vehicle-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  background-color: var(--blueish);
+  padding: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#vehicle-display h2 {
+  font-size: xx-large;
+}
+
+#vehicle-display h3 {
+  opacity: 0.75;
+  font-size: x-large;
+  text-decoration: underline;
+}
+
+#vehicle-display div p {
+  font-size: large;
+}
+
+#vehicle-img {
+  grid-column: 1;
+  grid-row: 2;
+  height: 175px;
+  width: 300px;
+  
+}
+
+#vehicle-title {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#vehicle-price {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+#vehicle-description {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#vehicle-color {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+#vehicle-miles {
+  grid-column: 2;
+  grid-row: 4;
+}
+
 }
