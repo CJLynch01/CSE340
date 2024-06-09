@@ -37,12 +37,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
 
 // Build Error
 errormess.buildError = (req, res, next) => {
-  const errorId = req. params.ErrorId;
-  if (errorId === "1") {
     throw new Error("Intentional error occurred");
-} else {
-  res.status(404).send("Not Found");
-}
 };
 
-module.exports = invCont, errormess
+module.exports = { invCont, errormess };
