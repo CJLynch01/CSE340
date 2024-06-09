@@ -34,6 +34,9 @@ app.use("/inv", inventoryRoute)
 * Place after all other middleware
 *************************/
 app.use(async (req, res, next) => {
+  next({status: 500, message: "This is intentional."})
+});
+app.use(async (req, res, next) => {
   next({ status: 404, message: "Sorry, we appear to have lost that page." });
 });
 

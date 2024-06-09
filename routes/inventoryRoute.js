@@ -9,4 +9,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build single view
 router.get("/detail/:inventoryId", invController.buildByInventoryId);
 
+//Intentional Error
+router.get("/trigger-error/:ErrorId", invController.buildError);
+
 module.exports = router;

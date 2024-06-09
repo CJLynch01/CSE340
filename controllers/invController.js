@@ -2,6 +2,7 @@ const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 
 const invCont = {}
+const errormess = {}
 
 /* ***************************
  *  Build inventory by classification view
@@ -34,4 +35,14 @@ invCont.buildByInventoryId = async function (req, res, next) {
   })
 }
 
-module.exports = invCont
+// Build Error
+errormess.buildError = (req, res, next) => {
+  const errorId = req. params.ErrorId;
+  if (errorId === "1") {
+    throw new Error("Intentional error occurred");
+} else {
+  res.status(404).send("Not Found");
+}
+};
+
+module.exports = invCont, errormess
