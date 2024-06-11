@@ -4,19 +4,28 @@
     res.redirect('/')
 } %>
     
-<form action="/register" method="POST" id="loginform">
+<form id="registerform" action="/register" method="POST" id="loginform">
     <div>
         <label for="fname">First name:</label>
         <input type="fname" id="fname" name="fname" required>
     </div>
     <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>  
+        <label for="lname">Last name:</label>
+        <input type="lname" id="lname" name="lname" required>  
     </div>
+    <div>
+        <label for="regemail">Email address:</label>
+        <input type="regemail" id="regemail" name="regemail" required>  
+    </div>
+    
+        <label for="regpassword1">Password:</label>
+        <input type="regpassword1" id="regpassword" name="regpassword" required>
+        <span id="showpassword">Show Password</span>  
+    
     <div id="messages">
         <%- messages() %>
     </div>
     <div>
-        <button type="submit">Login</button>
+        <button type="regsubmit">Register</button>
     </div>
 </form>

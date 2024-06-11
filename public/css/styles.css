@@ -300,6 +300,20 @@ nav ul li {
   font-style: italic;
 }
 
+#registerform * {
+  display: block;
+}
+
+#showpassword {
+  border: 2px solid var(--black);
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 1em;
+  font-size: small;
+  width: 7em;
+  text-align: center;
+}
+
 /* -------------LARGE VIEW----------- */
 
 
