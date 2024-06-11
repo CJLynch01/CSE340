@@ -1,5 +1,5 @@
 const utilities = require("../utilities/");
-const accountModel = require("../account-model/")
+const accountModel = require("../models/account-model")
 
 /* ****************************************
 *  Deliver login view
