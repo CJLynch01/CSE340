@@ -1,0 +1,22 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+    
+<form action="/register" method="POST" id="loginform">
+    <div>
+        <label for="fname">First name:</label>
+        <input type="fname" id="fname" name="fname" required>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>  
+    </div>
+    <div id="messages">
+        <%- messages() %>
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
