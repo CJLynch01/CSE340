@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const passwordbtn = document.querySelector("#passwordbtn");
 
     passwordbtn.addEventListener("click", function() {
-        const passwordinput = document.getElementById("regpword");
+        const passwordinput = document.getElementById("account_password");
         const type = passwordinput.getAttribute("type");
         if (type == "password") {
             passwordinput.setAttribute("type", "text");
