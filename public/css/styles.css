@@ -272,6 +272,34 @@ nav ul li {
   font-size: large;
 }
 
+/* Login Page  */
+
+#loginform {
+  text-align: center;
+  background-color: var(--blueish);
+  border-top: 1px;
+  border-bottom: 1px;
+  border-color: var(--border);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#registeraccount {
+  margin-top: 0;
+  background-color: var(--blueish);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#messages li {
+  list-style-type: none;
+  font-style: italic;
+}
+
 /* -------------LARGE VIEW----------- */
 
 
