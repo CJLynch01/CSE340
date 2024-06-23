@@ -315,6 +315,64 @@ nav ul li {
   text-align: center;
 }
 
+.add-class-form {
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  gap: 1em;
+}
+
+.add-class-form label {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Management View */
+.management-options {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.management-options a {
+  text-decoration: none;
+  color: var(--black);
+  padding: 1em;
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.management-options a:hover {
+  background-color: var(--blueish);
+  color: var(--white);
+}
+
+/* Add Classification View */
+.add-class-form label input,
+.add-class-form label select {
+  width: 200px;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
+.add-class-form button {
+  padding: 1em 1.5em;
+  border: 1px solid var(--black);
+  border-radius: 20px;
+  color: var(--black);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.add-class-form button:hover {
+  background-color: var(--blueish);
+  color: var(--white);
+}
+
 /* -------------LARGE VIEW----------- */
 
 

@@ -19,7 +19,7 @@ router.get("/add-classification", utilities.handleErrors(invCont.addclassificati
 router.get("/add-inventory", utilities.handleErrors(invCont.addinventory));
 
 // Route to process add inventory form submission
-// router.post("/add-inventory", utilities.handleErrors(invCont.processAddInventory));
+router.post("/add-inventory", utilities.handleErrors(invCont.processAddInventory));
 
 // Intentional Error Route
 router.get("/trigger-error", utilities.handleErrors(errormess.buildError));

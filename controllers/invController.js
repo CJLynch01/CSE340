@@ -64,34 +64,45 @@ invCont.addclassification = async function (req, res, next) {
  * ************************** */
 invCont.addinventory = async function (req, res, next) {
   let nav = await utilities.getNav()
-  // const classificationList = await utilities.buildClassificationList();
-  // req.flash("notice", "This is a flash message.");
+  const classificationList = await utilities.buildClassificationList();
+  req.flash("notice", "This is a flash message.");
   res.render("./inventory/add-inventory", {
     title: "Add New Inventory",
     nav,
-    // classificationList,
-    // messages: req.flash(),
-    // FormData: req.body,
+    classificationList,
   })
 }
 
 /* ***************************
 * Process add inventory form submission
 * ************************** */
-// invCont.processAddInventory = async function (req, res, next) {
-//   const { year, make, model, classification_id, description } = req.body;
-//   const image = req.file ? req.file.filename : 'no-image.jpg'; // Default image path
-//   const thumbnail = req.file ? req.file.filename : 'no-image-thumbnail.jpg'; // Default thumbnail path
+invCont.processAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  let classifications = await utilities.buildClassificationList();
+  const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id } = req.body;
 
-//   const result = await invModel.addInventory(year, make, model, classification_id, description, image, thumbnail);
-//   if (result) {
-//     req.flash("success", "New inventory added successfully!");
-//     res.redirect("/inv");
-//   } else {
-//     req.flash("error", "Failed to add new inventory. Please try again.");
-//     res.redirect("/inv/add-inventory");
-//   }
-// };
+  const createResult = await invModel.addinventory(inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id);
+
+  if (createResult) {
+      req.flash("notice", "Vehicle added successfully.");
+      res.status(201).redirect("/inv");
+  } else {
+      req.flash("notice", "Sorry, there was an error adding the vehicle.");
+      res.status(500).render("./inventory/add-inventory", {
+          title: "New Vehicle Form",
+          nav,
+          classifications,
+          inv_make,
+          inv_model,
+          inv_year,
+          inv_description,
+          inv_price,
+          inv_miles,
+          inv_color,
+          classification_id
+      });
+  }
+}
 
 // Build Error
 errormess.buildError = (req, res, next) => {

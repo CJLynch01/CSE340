@@ -45,19 +45,18 @@ async function getInventoryByID(inventory_id) {
 /* ***************************
  *  Add inventory to database
  * ************************** */
-// async function addInventory(year, make, model, classification_id, description, image, thumbnail) {
-//   const queryText = `
-//     INSERT INTO public.inventory (inv_year, inv_make, inv_model, classification_id, inv_description, inv_image, inv_thumbnail)
-//     VALUES ($1, $2, $3, $4, $5, $6, $7)
-//   `;
-//   const values = [year, make, model, classification_id, description, image, thumbnail];
-//   try {
-//     const result = await pool.query(queryText, values);
-//     return result.rowCount > 0;
-//   } catch (error) {
-//     console.error("Error adding inventory: " + error);
-//     return false;
-//   }
-// }
+async function addinventory(inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id) {
+  const inv_image = "/images/vehicles/no-image.png";
+  const inv_thumbnail = "/images/vehicles/no-image-tn.png";
+  const result = await pool.query(
+      `
+          INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) 
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+          RETURNING *;
+      `,
+      [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id]
+  );
+  return result;
+}
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID}
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID, addinventory}
