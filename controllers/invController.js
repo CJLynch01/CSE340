@@ -35,6 +35,45 @@ invCont.buildByInventoryId = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Show management view
+ * ************************** */
+invCont.management = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message.");
+  res.render("./inventory/management", {
+    title: "Inventory Management",
+    nav,
+    message,
+  })
+}
+
+/* ***************************
+ *  Show add classification view
+ * ************************** */
+invCont.addclassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message.");
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+  })
+}
+
+/* ***************************
+ *  Show add inventory view
+ * ************************** */
+invCont.addInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList();
+  req.flash("notice", "This is a flash message.");
+  res.render("./inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+    classificationList,
+  })
+}
+
 // Build Error
 errormess.buildError = (req, res, next) => {
     throw new Error("Intentional error occurred");
