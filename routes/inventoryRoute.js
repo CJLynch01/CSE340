@@ -10,13 +10,16 @@ router.get("/type/:classificationId", utilities.handleErrors(invCont.buildByClas
 router.get("/detail/:inventoryId", utilities.handleErrors(invCont.buildByInventoryId));
 
 // Route for management view
-router.get("/inv", utilities.handleErrors(invCont.management));
+router.get("/", utilities.handleErrors(invCont.management));
 
 // Route for add classification view
-// router.get("/inv/add-classification", utilities.handleErrors(invCont.addClassification));
+router.get("/add-classification", utilities.handleErrors(invCont.addclassification));
 
 // Route for add inventory view
-// router.get("/inv/add-inventory", utilities.handleErrors(invCont.addInventory));
+router.get("/add-inventory", utilities.handleErrors(invCont.addInventory));
+
+// Route to process add inventory form submission
+router.post("/add-inventory", utilities.handleErrors(invCont.processAddInventory));
 
 // Intentional Error Route
 router.get("/trigger-error", utilities.handleErrors(errormess.buildError));

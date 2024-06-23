@@ -40,7 +40,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
  * ************************** */
 invCont.management = async function (req, res, next) {
   let nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message.");
+  req.flash("notice", "This is a flash message.");
   res.render("./inventory/management", {
     title: "Inventory Management",
     nav,
@@ -50,28 +50,46 @@ invCont.management = async function (req, res, next) {
 /* ***************************
  *  Show add classification view
  * ************************** */
-// invCont.addclassification = async function (req, res, next) {
-//   let nav = await utilities.getNav()
-//   req.flash("notice", "This is a flash message.");
-//   res.render("./inventory/add-classification", {
-//     title: "Add New Classification",
-//     nav,
-//   })
-// }
+invCont.addclassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message.");
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+  })
+}
 
 /* ***************************
  *  Show add inventory view
  * ************************** */
-// invCont.addInventory = async function (req, res, next) {
-//   let nav = await utilities.getNav()
-//   const classificationList = await utilities.buildClassificationList();
-//   req.flash("notice", "This is a flash message.");
-//   res.render("./inventory/add-inventory", {
-//     title: "Add New Inventory",
-//     nav,
-//     classificationList,
-//   })
-// }
+invCont.addInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList();
+  req.flash("notice", "This is a flash message.");
+  res.render("./inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+    classificationList,
+    messages: req.flash(),
+    FormData: req.body,
+  })
+}
+
+// Process add inventory form submission
+invCont.processAddInventory = async function (req, res, next) {
+  const { year, make, model, classification_id, description } = req.body;
+  const image = req.file ? req.file.filename : 'no-image.jpg'; // Default image path
+  const thumbnail = req.file ? req.file.filename : 'no-image-thumbnail.jpg'; // Default thumbnail path
+
+  const result = await invModel.addInventory(year, make, model, classification_id, description, image, thumbnail);
+  if (result) {
+    req.flash("success", "New inventory added successfully!");
+    res.redirect("/inv");
+  } else {
+    req.flash("error", "Failed to add new inventory. Please try again.");
+    res.redirect("/inv/add-inventory");
+  }
+};
 
 // Build Error
 errormess.buildError = (req, res, next) => {
