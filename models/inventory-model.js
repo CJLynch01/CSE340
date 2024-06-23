@@ -45,19 +45,19 @@ async function getInventoryByID(inventory_id) {
 /* ***************************
  *  Add inventory to database
  * ************************** */
-async function addInventory(year, make, model, classification_id, description, image, thumbnail) {
-  const queryText = `
-    INSERT INTO public.inventory (inv_year, inv_make, inv_model, classification_id, inv_description, inv_image, inv_thumbnail)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
-  `;
-  const values = [year, make, model, classification_id, description, image, thumbnail];
-  try {
-    const result = await pool.query(queryText, values);
-    return result.rowCount > 0;
-  } catch (error) {
-    console.error("Error adding inventory: " + error);
-    return false;
-  }
-}
+// async function addInventory(year, make, model, classification_id, description, image, thumbnail) {
+//   const queryText = `
+//     INSERT INTO public.inventory (inv_year, inv_make, inv_model, classification_id, inv_description, inv_image, inv_thumbnail)
+//     VALUES ($1, $2, $3, $4, $5, $6, $7)
+//   `;
+//   const values = [year, make, model, classification_id, description, image, thumbnail];
+//   try {
+//     const result = await pool.query(queryText, values);
+//     return result.rowCount > 0;
+//   } catch (error) {
+//     console.error("Error adding inventory: " + error);
+//     return false;
+//   }
+// }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID, addInventory}
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID}
