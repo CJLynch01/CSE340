@@ -1,10 +1,8 @@
 <% if (title) { %>
     <h1><%= title %></h1>
-<% } else {
-    res.redirect('/')
-} %>
-
-<% messages() %>
+    <% } else {
+        res.redirect('/')
+    } %>
 
 <form name="addInventoryForm" action="/inv/add-inventory" method="POST" onsubmit="return validateForm()">
     <label for="classification_id">Classification:</label>
