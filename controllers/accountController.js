@@ -30,6 +30,7 @@ async function buildRegister(req, res, next) {
     });
 }
 
+
 /* ****************************************
 *  Deliver account view
 * *************************************** */
