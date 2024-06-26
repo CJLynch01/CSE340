@@ -37,7 +37,7 @@ async function getAccountManagementView(req, res, next) {
   let nav = await utilities.getNav();
   req.flash("notice", "This is a flash message.");
   res.render("account/management", {
-    title: "You're logged in",
+    title: "Management Inventory",
     nav,
     errors: null,
   });
