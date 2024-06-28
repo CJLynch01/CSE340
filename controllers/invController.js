@@ -22,6 +22,26 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 /* ***************************
+ * Add New Classification to database
+ * ************************** */
+invCont.addClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+  const addResult = await invModel.addNewClassification(classification_name)
+  if (addResult) {
+    req.flash("info success", `${classification_name} added successfully.`)
+    res.redirect("/inv/")
+  } else {
+    req.flash("info error", "Classification not entered. Try again.")
+    res.render("./inventory/add-classification", {
+      title: "Add New Classification Page",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+/* ***************************
  *  Build single view
  * ************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
@@ -59,6 +79,18 @@ invCont.addclassification = async function (req, res, next) {
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
     nav,
+  })
+}
+
+/* ***************************
+ * Show New Classification Form
+ * ************************** */
+invCont.newclassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification Page",
+    nav,
+    errors: null,
   })
 }
 
@@ -112,4 +144,4 @@ errormess.buildError = (req, res, next) => {
     throw new Error("Intentional error occurred");
 };
 
-module.exports = { invCont, errormess };
+module.exports = { invCont, errormess, newclassification, addclassification };

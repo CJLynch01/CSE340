@@ -1,6 +1,6 @@
 const utilities = require(".")
-  const { body, validationResult } = require("express-validator")
-  const validate = {}
+const { body, validationResult } = require("express-validator")
+const validate = {}
 const accountModel = require("../models/account-model")
 
 /*  **********************************
@@ -27,8 +27,6 @@ validate.registrationRules = () => {
       // valid email is required and cannot already exist in the DB
       body("account_email")
       .trim()
-      .escape()
-      .notEmpty()
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required.")
@@ -83,8 +81,6 @@ validate.loginRules = () => {
   return [
       body("account_email")
           .trim()
-          .escape()
-          .notEmpty()
           .isEmail()
           .normalizeEmail()
           .withMessage("A valid email is required."),
@@ -92,6 +88,12 @@ validate.loginRules = () => {
       body("account_password")
           .trim()
           .notEmpty()
+          .isStrongPassword({
+            minLength: 12,
+            minLowercase: 1,
+            minNumbers: 1,
+            minSymbols: 1
+          })
           .withMessage("Password is required."),
   ];
 };

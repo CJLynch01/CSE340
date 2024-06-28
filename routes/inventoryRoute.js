@@ -13,7 +13,10 @@ router.get("/detail/:inventoryId", utilities.handleErrors(invCont.buildByInvento
 router.get("/", utilities.handleErrors(invCont.management));
 
 // Route for add classification view
-router.get("/add-classification", utilities.handleErrors(invCont.addclassification));
+router.get("/new-classification", 
+    utilities.handleErrors(invCont.newclassification));
+router.post("/add-classification",
+    utilities.handleErrors(invCont.addclassification));
 
 // Route for add inventory view
 router.get("/add-inventory", utilities.handleErrors(invCont.addinventory));
