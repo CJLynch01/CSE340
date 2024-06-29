@@ -71,7 +71,7 @@ async function addinventory(inv_make, inv_model, inv_year, inv_description, inv_
       `,
       [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id]
   );
-  return result.rows[0];
+  return result.rows;
 }
 
 module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID, addinventory, addclassification}

@@ -94,12 +94,12 @@ invCont.processclassification = async function (req, res, next) {
  * ************************** */
 invCont.addinventory = async function (req, res, next) {
   let nav = await utilities.getNav()
-  const classificationList = await utilities.buildClassificationList();
+  const dropdown = await utilities.buildClassificationList();
   req.flash("notice", "This is a flash message.");
   res.render("./inventory/add-inventory", {
     title: "Add New Inventory",
     nav,
-    classificationList,
+    dropdown,
   })
 }
 
@@ -108,28 +108,26 @@ invCont.addinventory = async function (req, res, next) {
 * ************************** */
 invCont.processAddInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
-  let classifications = await utilities.buildClassificationList();
+  let dropdown = await utilities.buildClassificationList(classification_id);
+  
   const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id } = req.body;
-
   const createResult = await invModel.addinventory(inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id);
 
   if (createResult) {
       req.flash("notice", "Vehicle added successfully.");
-      res.status(201).redirect("/inv");
+      res.status(201).redirect("/inv", {
+        title: "Add Inventory",
+        nav,
+        errors: null,
+        dropdown,
+      });
   } else {
       req.flash("notice", "Sorry, there was an error adding the vehicle.");
       res.status(500).render("./inventory/add-inventory", {
-          title: "New Vehicle Form",
-          nav,
-          classifications,
-          inv_make,
-          inv_model,
-          inv_year,
-          inv_description,
-          inv_price,
-          inv_miles,
-          inv_color,
-          classification_id
+        title: "Add Inventory",
+        nav,
+        errors: null,
+        dropdown,
       });
   }
 }
