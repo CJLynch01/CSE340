@@ -22,26 +22,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 /* ***************************
- * Add New Classification to database
- * ************************** */
-invCont.addClassification = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  const { classification_name } = req.body
-  const addResult = await invModel.addNewClassification(classification_name)
-  if (addResult) {
-    req.flash("info success", `${classification_name} added successfully.`)
-    res.redirect("/inv/")
-  } else {
-    req.flash("info error", "Classification not entered. Try again.")
-    res.render("./inventory/add-classification", {
-      title: "Add New Classification Page",
-      nav,
-      errors: null,
-    })
-  }
-}
-
-/* ***************************
  *  Build single view
  * ************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
@@ -73,26 +53,41 @@ invCont.management = async function (req, res, next) {
 /* ***************************
  *  Show add classification view
  * ************************** */
-invCont.addclassification = async function (req, res, next) {
+invCont.newclassification = async function (req, res, next) {
   let nav = await utilities.getNav()
   req.flash("notice", "This is a flash message.");
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
     nav,
+    errors: null,
   })
 }
 
 /* ***************************
- * Show New Classification Form
+ * Process New Classification to database
  * ************************** */
-invCont.newclassification = async function (req, res, next) {
+invCont.processclassification = async function (req, res, next) {
   let nav = await utilities.getNav()
-  res.render("./inventory/add-classification", {
-    title: "Add New Classification Page",
-    nav,
-    errors: null,
-  })
-}
+  const { classification_name } = req.body
+  const addResult = await invModel.addclassification(classification_name)
+  if (addResult) {
+    req.flash("info success", `${classification_name} added successfully.`)
+    res.status(201).render("./inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+      errors: null,
+      classification_name,
+    });
+  } else {
+    req.flash("notice", "Sorry, the classification failed.");
+    res.status(501).render("./inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+      errors: null,
+      classification_name,
+    });
+  }
+};
 
 /* ***************************
  *  Show add inventory view
@@ -144,4 +139,4 @@ errormess.buildError = (req, res, next) => {
     throw new Error("Intentional error occurred");
 };
 
-module.exports = { invCont, errormess, newclassification, addclassification };
+module.exports = { invCont, errormess };
