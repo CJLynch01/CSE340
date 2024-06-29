@@ -100,6 +100,7 @@ invCont.addinventory = async function (req, res, next) {
     title: "Add New Inventory",
     nav,
     dropdown,
+    errors: null,
   })
 }
 
@@ -128,6 +129,14 @@ invCont.processAddInventory = async function (req, res, next) {
         nav,
         errors: null,
         dropdown,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
       });
   }
 }

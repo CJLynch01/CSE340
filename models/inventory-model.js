@@ -1,5 +1,4 @@
 const pool = require("../database/")
-const invModel= {};
 
 /* ***************************
  *  Get all classification data
@@ -63,15 +62,15 @@ async function addclassification(classification_name) {
 async function addinventory(inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id) {
   const inv_image = "/images/vehicles/no-image.png";
   const inv_thumbnail = "/images/vehicles/no-image-tn.png";
-  const result = await pool.query(
+  const data = 
       `
           INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) 
           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-          RETURNING *;
-      `,
-      [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id]
-  );
-  return result.rows;
+      `
+  const input = [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id];
+
+  const result = await pool.query(data, input);
+  return result;
 }
 
 module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID, addinventory, addclassification}
