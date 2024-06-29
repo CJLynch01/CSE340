@@ -115,7 +115,7 @@ invCont.processAddInventory = async function (req, res, next) {
 
   if (createResult) {
       req.flash("notice", "Vehicle added successfully.");
-      res.status(201).redirect("/inv", {
+      res.status(201).render("./inventory/add-inventory", {
         title: "Add Inventory",
         nav,
         errors: null,
