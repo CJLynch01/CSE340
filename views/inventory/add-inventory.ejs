@@ -13,29 +13,119 @@
 </ul>
 <% } %>
 
-      <div class="form-container">
-        <form action="/inv/add-inventory" method="POST">
-        <label for="classification_id">Classification:</label>
-        
+<form action="/inv/add-inventory" method="post">
+    <p class="form-pair">
+        <label for="classification_id" class="required">Classification</label>
         <%- dropdown %>
-        <label for="inv_make">Make:</label>
-        <input type="text" id="inv_make" name="inv_make" placeholder="Min of 3 characters" required minlength="3" value="<%= locals.inv_make %>">
-        <label for="inv_model">Model:</label>
-        <input type="text" id="inv_model" name="inv_model" placeholder="Min of 3 characters" required minlength="3" value="<%= locals.inv_model %>">
-        <label for="inv_description">Description:</label>
-        <input type="text" id="inv_description" name="inv_description" required value="<%= locals.inv_description %>">
-        <label for="inv_image">Image Path:</label>
-        <input type="text" id="inv_image" name="inv_image" required value="<%= locals.inv_image %>">
-        <label for="inv_thumbnail">Thumbnail Path:</label>
-        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
-        <label for="inv_price">Price:</label>
-        <input type="text" id="inv_price" name="inv_price" placeholder="decimal or integer" required step="any" value="<%= locals.inv_price %>">
-        <label for="inv_year">Year:</label>
-        <input type="text" id="inv_year" name="inv_year" placeholder="4-digit year" required min="1000" value="<%= locals.inv_year %>"> 
-        <label for="inv_miles">Miles:</label>
-        <input type="text" id="inv_miles" name="inv_miles" placeholder="digits only" required step="any" value="<%= locals.inv_miles %>"> 
-        <label for="inv_color">Color:</label>
-        <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>">
-        <input type="submit" value="Submit">
-        </form>
-      </div>
+    </p>
+    <!-- inventory make -->
+    <p class="form-pair">
+        <label for="inv_make" class="required">Make</label>
+        <input 
+            type="text" 
+            id="inventory_make" 
+            name="inv_make" 
+            class="form-input" 
+            placeholder="Enter the make of the inventory item"
+            required
+            value="<%= locals.inv_make %>"
+        >
+    </p>
+    <!-- inventory model -->
+    <p class="form-pair">
+        <label for="inv_model" class="required">Model</label>
+        <input 
+            type="text" 
+            id="inventory_model" 
+            name="inv_model" 
+            class="form-input" 
+            placeholder="Enter the model of the inventory item"
+            required
+            value="<%= locals.inv_model %>"
+        >
+    </p>
+    <!-- inventory year -->
+    <p class="form-pair">
+        <label for="inv_year" class="required">Year</label>
+        <input 
+            type="number" 
+            id="inventory_year" 
+            name="inv_year" 
+            class="form-input" 
+            placeholder="Enter the year of the inventory item"
+            required
+            value="<%= locals.inv_year %>"
+        >
+    </p>
+    <!-- inventory description -->
+    <p class="form-pair">
+        <label for="inv_description" class="required">Description</label>
+        <textarea id="inventory_description" name="inv_description" class="form-input" placeholder="Enter the description of the inventory item" required><%= locals.inv_description %></textarea>
+    </p>
+    <!-- inventory image -->
+    <p class="form-pair">
+        <label for="inv_image" class="required">Image</label>
+        <input 
+            type="text" 
+            id="inventory_image" 
+            name="inv_image" 
+            class="form-input" 
+            placeholder="Enter the image of the inventory item"
+            required
+            value="<%= locals.inv_image %>"
+        >
+    </p>
+    <!-- inventory thumbnail -->
+    <p class="form-pair">
+        <label for="inv_thumbnail" class="required">Thumbnail</label>
+        <input 
+            type="text" 
+            id="inventory_thumbnail" 
+            name="inv_thumbnail" 
+            class="form-input" 
+            placeholder="Enter the thumbnail of the inventory item"
+            required
+            value="<%= locals.inv_thumbnail %>"
+        >
+    </p>
+    <!-- inventory price -->
+    <p class="form-pair">
+        <label for="inv_price" class="required">Price</label>
+        <input 
+            type="number" 
+            id="inventory_price" 
+            name="inv_price" 
+            class="form-input" 
+            placeholder="Enter the price of the inventory item"
+            required
+            value="<%= locals.inv_price %>"
+        >
+    </p>
+    <!-- inventory miles -->
+    <p class="form-pair">
+        <label for="inv_miles" class="required">Miles</label>
+        <input 
+            type="number" 
+            id="inventory_miles" 
+            name="inv_miles" 
+            class="form-input" 
+            placeholder="Enter the miles of the inventory item"
+            required
+            value="<%= locals.inv_miles %>"
+        >
+    </p>
+    <!-- inventory color -->
+    <p class="form-pair">
+        <label for="inv_color" class="required">Color</label>
+        <input 
+            type="text" 
+            id="inventory_color" 
+            name="inv_color" 
+            class="form-input" 
+            placeholder="Enter the color of the inventory item"
+            required
+            value="<%= locals.inv_color %>"
+        >
+    </p>
+    <button type="submit" class="form-button">Add Inventory</button>
+</form>

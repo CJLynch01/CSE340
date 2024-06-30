@@ -108,25 +108,18 @@ invCont.addinventory = async function (req, res, next) {
 * Process add inventory form submission
 * ************************** */
 invCont.processInventory = async function (req, res, next) {
+  const {classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color} = req.body
+
   let nav = await utilities.getNav();
 
-  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
+  const inventoryResult = await invModel.addinventory(classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color)
+  const classification = await invModel.addclassification()
 
-  let dropdown = await utilities.buildClassificationList(classification_id);
+  let dropdown = await utilities.buildClassificationList(classification);
 
-  const inventoryResult = await invCont.addinventory(
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_description,
-    inv_image,
-    inv_thumbnail,
-    inv_price,
-    inv_miles,
-    inv_color,
-    classification_id
-  );
+
   if (inventoryResult) {
+    let nav = await utilities.getNav()
     req.flash(
       "notice",
       `Inventory ${inv_make} ${inv_model} added.`
