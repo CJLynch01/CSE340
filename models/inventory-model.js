@@ -59,18 +59,38 @@ async function addclassification(classification_name) {
 /* ***************************
  *  Add inventory to database
  * ************************** */
-async function addinventory(inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id) {
-  const inv_image = "/images/vehicles/no-image.png";
-  const inv_thumbnail = "/images/vehicles/no-image-tn.png";
-  const data = 
-      `
-          INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) 
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-      `
-  const input = [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id];
-
-  const result = await pool.query(data, input);
-  return result;
+async function addinventory(
+  inv_make,
+  inv_model,
+  inv_year,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql = `INSERT INTO public.inventory (inventory_make, inventory_model, inventory_year, inventory_description, inventory_image, inventory_thumbnail, inventory_price, inventory_miles, inventory_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`;
+    const inputList = [
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    ];
+    console.log(inputList);
+    const data = await pool.query(sql, inputList);
+    return data;
+  } catch (error) {
+    console.error("addInventory error " + error);
+  }
 }
 
 module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID, addinventory, addclassification}

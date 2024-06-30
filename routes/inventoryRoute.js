@@ -24,7 +24,7 @@ router.get("/add-inventory",
     utilities.handleErrors(invCont.addinventory));
 
 router.post("/add-inventory", 
-    utilities.handleErrors(invCont.processAddInventory));
+    utilities.handleErrors(invCont.processInventory));
 
 // Intentional Error Route
 router.get("/trigger-error", utilities.handleErrors(errormess.buildError));

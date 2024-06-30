@@ -107,39 +107,46 @@ invCont.addinventory = async function (req, res, next) {
 /* ***************************
 * Process add inventory form submission
 * ************************** */
-invCont.processAddInventory = async function (req, res, next) {
+invCont.processInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
-  let dropdown = await utilities.buildClassificationList(classification_id);
-  
-  const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id } = req.body;
-  const createResult = await invModel.addinventory(inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id);
 
-  if (createResult) {
-      req.flash("notice", "Vehicle added successfully.");
-      res.status(201).render("./inventory/add-inventory", {
-        title: "Add Inventory",
-        nav,
-        errors: null,
-        dropdown,
-      });
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
+
+  let dropdown = await utilities.buildClassificationList(classification_id);
+
+  const inventoryResult = await invCont.addinventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+  if (inventoryResult) {
+    req.flash(
+      "notice",
+      `Inventory ${inv_make} ${inv_model} added.`
+    );
+    res.status(201).render("./inventory/add-inventory", {
+      title: "Add Inventory",
+      nav,
+      errors: null,
+      dropdown,
+    });
   } else {
-      req.flash("notice", "Sorry, there was an error adding the vehicle.");
-      res.status(500).render("./inventory/add-inventory", {
-        title: "Add Inventory",
-        nav,
-        errors: null,
-        dropdown,
-        inv_make,
-        inv_model,
-        inv_year,
-        inv_description,
-        inv_price,
-        inv_miles,
-        inv_color,
-        classification_id
-      });
+    req.flash("notice", "Sorry, the inventory failed.");
+    res.status(501).render("./inventory/add-inventory", {
+      title: "Add Inventory",
+      nav,
+      errors: null,
+      dropdown,
+    });
   }
-}
+};
 
 // Build Error
 errormess.buildError = (req, res, next) => {
