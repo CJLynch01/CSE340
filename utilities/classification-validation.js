@@ -115,4 +115,86 @@ validate.inventoryRules = () => {
     ];
   };
 
+/* ******************************
+ * Check data and return errors or continue to add vehicle
+ * ***************************** */
+validate.checkVehicleData = async (req, res, next) => {
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body
+  let errors = []
+  const dropdown = await utilities.buildClassificationList(classification_id)
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("inventory/add-inventory", {
+      title: "Add Vehicle",
+      nav,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      dropdown,
+      errors,
+    })
+    return
+  }
+  next()
+}
+
+/* ******************************
+ * Check data and return errors or return to edit vehicle page
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body
+  let errors = []
+  const dropdown = await utilities.buildClassificationList(classification_id)
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("inventory/edit-inventory", {
+      title: "Edit Vehicle",
+      nav,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      dropdown,
+      errors,
+    })
+    return
+  }
+  next()
+}
+
 module.exports = validate;
