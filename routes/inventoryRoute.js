@@ -29,4 +29,6 @@ router.post("/add-inventory",
 // Intentional Error Route
 router.get("/trigger-error", utilities.handleErrors(errormess.buildError));
 
+// Process route and return data as JSON
+router.get("/getInventory/:classification_id", utilities.handleErrors(invCont.getInventoryJSON))
 module.exports = router;
