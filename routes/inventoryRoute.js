@@ -34,6 +34,6 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invCont.ge
 
 // Route to show edit page view
 router.get("/edit/:inv_id",
-    utilities.handleErrors(invCont.editInventoryView))
+    utilities.handleErrors(invCont.showeditpage));
 
 module.exports = router;
