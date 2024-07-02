@@ -43,8 +43,6 @@ router.get("/edit/:inv_id",
     utilities.handleErrors(invCont.showeditpage));
 
 router.post("/update-vehicle", 
-    invValidate.inventoryRules(),
-    invValidate.checkUpdateData,
     utilities.handleErrors(invCont.updateInventory));
 
 

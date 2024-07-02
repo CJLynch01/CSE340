@@ -160,15 +160,15 @@ invCont.getInventoryJSON = async (req, res, next) => {
  *  Build edit inventory view
  * ************************** */
 invCont.showeditpage = async function (req, res, next) {
-  const inv_id = parseInt(req.params.inventoryId)
+  const inv_id = parseInt(req.params.inv_id)
   let nav = await utilities.getNav()
   const itemData = await invModel.getInventoryByID(inv_id)
-  const classificationSelect = await utilities.buildClassificationList(itemData.classification_id)
+  const dropdown = await utilities.buildClassificationList(itemData.classification_id)
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
   res.render("./inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
-    classificationSelect: classificationSelect,
+    dropdown,
     errors: null,
     inv_id: itemData.inv_id,
     inv_make: itemData.inv_make,
@@ -223,13 +223,13 @@ invCont.updateInventory = async function (req, res, next) {
     req.flash("notice", `The ${itemName} was successfully updated.`)
     res.redirect("/inv/")
   } else {
-    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    const dropdown = await utilities.buildClassificationList(classification_id)
     const itemName = `${inv_make} ${inv_model}`
     req.flash("notice", "Sorry, the insert failed.")
     res.status(501).render("inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
-    classificationSelect: classificationSelect,
+    dropdown,
     errors: null,
     inv_id,
     inv_make,
