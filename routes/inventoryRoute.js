@@ -30,5 +30,10 @@ router.post("/add-inventory",
 router.get("/trigger-error", utilities.handleErrors(errormess.buildError));
 
 // Process route and return data as JSON
-router.get("/getInventory/:classification_id", utilities.handleErrors(invCont.getInventoryJSON))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invCont.getInventoryJSON));
+
+// Route to show edit page view
+router.get("/edit/:inv_id",
+    utilities.handleErrors(invCont.editInventoryView))
+
 module.exports = router;
