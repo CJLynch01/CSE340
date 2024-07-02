@@ -45,5 +45,11 @@ router.get("/edit/:inv_id",
 router.post("/update-vehicle", 
     utilities.handleErrors(invCont.updateInventory));
 
+//Route to show delete view
+router.get("/delete/:inv_id",
+    utilities.handleErrors(invCont.showdeletepage));
+
+router.post("/delete-vehicle",
+    utilities.handleErrors(invCont.processdelete));
 
 module.exports = router;
