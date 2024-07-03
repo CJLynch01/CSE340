@@ -1,9 +1,14 @@
-<% if (title) { %>
-    <h1>
-        <%= title %>
-    </h1>
-    <% } else { res.redirect('/') } %>
-        <%- messages() %>
+<div class="managementtitle">
+    <% if (title) { %>
+        <h1>
+            <%= title %>
+        </h1>
+        <% } else { res.redirect('/') } %>
+</div>
+
+<div class="managementmess">
+    <%- messages() %>
+</div>
 
 <div class="management-options">
     <a href="/inv/add-classification">Add New Classification</a>

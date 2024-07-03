@@ -7,6 +7,7 @@
   --black: #000000;
   --border: #909090;
   --p: #0033FF;
+  --warning: red;
   --transparent: rgba(255, 255, 255, .8);
 
 /* Fonts */
@@ -62,6 +63,14 @@ nav ul li {
   margin-top: 10px;
   margin-bottom: 10px;
   font-family: var(--navi);
+}
+
+nav ul li a {
+  color: var(--white);
+}
+
+nav ul li a:hover {
+  color: var(--blueish);
 }
 
 /* Body Styling */
@@ -296,7 +305,7 @@ nav ul li {
   padding-bottom: 20px;
 }
 
-#messages li {
+#logmessages li {
   list-style-type: none;
   font-style: italic;
 }
@@ -329,11 +338,32 @@ nav ul li {
   flex-direction: column;
 }
 
+/* Register View */
+
+#registerform {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  background-color: var(--blueish);
+}
+
+#registerform div {
+  padding-top: 10px;
+}
+
+#regpass {
+  padding-top: 5px;
+  color: var(--white);
+}
+
 /* Management View */
-.management-options {
+.management-options, .managementtitle, .managementmess {
   display: flex;
   flex-direction: row;
   gap: 1em;
+  background-color: var(--blueish);
+  padding-bottom: 10px;
+  padding-left: 10px;
 }
 
 .management-options a {
@@ -347,6 +377,21 @@ nav ul li {
 
 .management-options a:hover {
   background-color: var(--blueish);
+  color: var(--white);
+}
+
+#inventoryDisplay {
+  margin-top: 10px;
+  background-color: var(--blueish);
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
+
+#inventoryDisplay a {
+  color: var(--black);
+}
+
+#inventoryDisplay a:hover {
   color: var(--white);
 }
 
@@ -372,6 +417,37 @@ nav ul li {
   background-color: var(--blueish);
   color: var(--white);
 }
+
+/* Add Inventory View */
+#addinventoryform {
+  background-color: var(--blueish);
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Edit View */
+#updateForm {
+  background-color: var(--blueish);
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Delete View */
+#deleteForm {
+  background-color: var(--blueish);
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#deleteconfirm {
+  color: var(--warning);
+  font-weight: bold;
+}
+
+
 
 /* -------------LARGE VIEW----------- */
 

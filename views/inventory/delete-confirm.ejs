@@ -13,70 +13,70 @@
 </ul>
 <% } %>
 
-<p>Confirm Deletion - The delete is permanent.</p>
+<p id="deleteconfirm">Confirm Deletion - The delete is permanent.</p>
 
-<form action="/inv/delete-vehicle" method="post">
-    <p class="form-pair">
-        <label for="classification_id" class="required">Classification</label>
+<form id="deleteForm" action="/inv/delete-vehicle" method="post">
+    <p>
+        <label>Classification</label>
     </p>
+
     <!-- inventory make -->
-    <p class="form-pair">
-        <label for="inv_make" class="required">Make</label>
+    <p>
+        <label>Make</label>
         <input 
             type="text" 
             id="inventory_make" 
             name="inv_make" 
-            class="form-input" 
-            placeholder="Enter the make of the inventory item"
+            placeholder="Enter the make"
             required
             readonly
             value="<%= locals.inv_make %>"
         >
     </p>
+
     <!-- inventory model -->
-    <p class="form-pair">
-        <label for="inv_model" class="required">Model</label>
+    <p>
+        <label>Model</label>
         <input 
             type="text" 
             id="inventory_model" 
             name="inv_model" 
-            class="form-input" 
-            placeholder="Enter the model of the inventory item"
+            placeholder="Enter the model"
             required
             readonly
             value="<%= locals.inv_model %>"
         >
     </p>
+
     <!-- inventory year -->
-    <p class="form-pair">
-        <label for="inv_year" class="required">Year</label>
+    <p>
+        <label>Year</label>
         <input 
             type="number" 
             id="inventory_year" 
             name="inv_year" 
-            class="form-input" 
-            placeholder="Enter the year of the inventory item"
+            placeholder="Enter the year"
             required
             readonly
             value="<%= locals.inv_year %>"
         >
     </p>
+    
     <!-- inventory price -->
-    <p class="form-pair">
-        <label for="inv_price" class="required">Price</label>
+    <p>
+        <label>Price</label>
         <input 
             type="number" 
             id="inventory_price" 
             name="inv_price" 
-            class="form-input" 
-            placeholder="Enter the price of the inventory item"
+            placeholder="Enter the price"
             required
             readonly
             value="<%= locals.inv_price %>"
         >
     </p>
     
-    <button type="submit" class="form-button">Delete Vehicle</button>
+    <button type="submit">Delete Vehicle</button>
 
     <input type="hidden" name="inv_id"
     <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"

@@ -13,121 +13,122 @@
 </ul>
 <% } %>
 
-<form action="/inv/update-vehicle" method="post">
-    <p class="form-pair">
-        <label for="classification_id" class="required">Classification</label>
+<form id="updateForm" action="/inv/update-vehicle" method="post">
+    <p>
+        <label>Classification</label>
         <%- dropdown %>
     </p>
+
     <!-- inventory make -->
-    <p class="form-pair">
-        <label for="inv_make" class="required">Make</label>
+    <p>
+        <label>Make</label>
         <input 
             type="text" 
             id="inventory_make" 
             name="inv_make" 
-            class="form-input" 
-            placeholder="Enter the make of the inventory item"
+            placeholder="Enter the make"
             required
             value="<%= locals.inv_make %>"
         >
     </p>
+
     <!-- inventory model -->
-    <p class="form-pair">
-        <label for="inv_model" class="required">Model</label>
+    <p>
+        <label>Model</label>
         <input 
             type="text" 
             id="inventory_model" 
             name="inv_model" 
-            class="form-input" 
-            placeholder="Enter the model of the inventory item"
+            placeholder="Enter the model"
             required
             value="<%= locals.inv_model %>"
         >
     </p>
+
     <!-- inventory year -->
-    <p class="form-pair">
-        <label for="inv_year" class="required">Year</label>
+    <p>
+        <label>Year</label>
         <input 
             type="number" 
             id="inventory_year" 
             name="inv_year" 
-            class="form-input" 
-            placeholder="Enter the year of the inventory item"
+            placeholder="Enter the year"
             required
             value="<%= locals.inv_year %>"
         >
     </p>
+
     <!-- inventory description -->
-    <p class="form-pair">
-        <label for="inv_description" class="required">Description</label>
-        <textarea id="inventory_description" name="inv_description" class="form-input" placeholder="Enter the description of the inventory item" required><%= locals.inv_description %></textarea>
+    <p>
+        <label>Description</label>
+        <textarea id="inventory_description" name="inv_description" placeholder="Enter the description" required><%= locals.inv_description %></textarea>
     </p>
+
     <!-- inventory image -->
-    <p class="form-pair">
-        <label for="inv_image" class="required">Image</label>
+    <p>
+        <label>Image</label>
         <input 
             type="text" 
             id="inventory_image" 
             name="inv_image" 
-            class="form-input" 
-            placeholder="Enter the image of the inventory item"
+            placeholder="Enter the image"
             required
             value="<%= locals.inv_image %>"
         >
     </p>
+
     <!-- inventory thumbnail -->
-    <p class="form-pair">
-        <label for="inv_thumbnail" class="required">Thumbnail</label>
+    <p>
+        <label>Thumbnail</label>
         <input 
             type="text" 
             id="inventory_thumbnail" 
             name="inv_thumbnail" 
-            class="form-input" 
-            placeholder="Enter the thumbnail of the inventory item"
+            placeholder="Enter the thumbnail"
             required
             value="<%= locals.inv_thumbnail %>"
         >
     </p>
+
     <!-- inventory price -->
-    <p class="form-pair">
-        <label for="inv_price" class="required">Price</label>
+    <p>
+        <label>Price</label>
         <input 
             type="number" 
             id="inventory_price" 
             name="inv_price" 
-            class="form-input" 
-            placeholder="Enter the price of the inventory item"
+            placeholder="Enter the price"
             required
             value="<%= locals.inv_price %>"
         >
     </p>
+
     <!-- inventory miles -->
-    <p class="form-pair">
-        <label for="inv_miles" class="required">Miles</label>
+    <p>
+        <label>Miles</label>
         <input 
             type="number" 
             id="inventory_miles" 
             name="inv_miles" 
-            class="form-input" 
-            placeholder="Enter the miles of the inventory item"
+            placeholder="Enter the miles"
             required
             value="<%= locals.inv_miles %>"
         >
     </p>
+
     <!-- inventory color -->
-    <p class="form-pair">
-        <label for="inv_color" class="required">Color</label>
+    <p>
+        <label>Color</label>
         <input 
             type="text" 
             id="inventory_color" 
             name="inv_color" 
-            class="form-input" 
-            placeholder="Enter the color of the inventory item"
+            placeholder="Enter the color"
             required
             value="<%= locals.inv_color %>"
         >
     </p>
-    <button type="submit" class="form-button" disabled>Update Vehicle</button>
+    <button type="submit" disabled>Update Vehicle</button>
 
     <input type="hidden" name="inv_id"
     <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
