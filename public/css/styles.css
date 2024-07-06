@@ -427,7 +427,7 @@ nav ul li a:hover {
 }
 
 /* Edit View */
-#updateForm {
+#updateForm1 {
   background-color: var(--blueish);
   padding-left: 15px;
   padding-top: 10px;
@@ -448,16 +448,16 @@ nav ul li a:hover {
 }
 
 /* Edit Info/Password */
-#form1 {
+#updateForm2 {
   background-color: var(--blueish);
   padding: 10px;
 }
 
-#updateform1 {
+#updateForm2 {
   padding: 15px;
 }
 
-#updateform1 div {
+#updateForm2 div {
   padding: 10px;
 }
 
@@ -467,11 +467,11 @@ nav ul li a:hover {
   margin-top: 10px;
 }
 
-#updateform2 {
+#updateForm3 {
   padding: 15px;
 }
 
-#updateform2 div {
+#updateForm3 div {
   padding: 10px;
 }
 

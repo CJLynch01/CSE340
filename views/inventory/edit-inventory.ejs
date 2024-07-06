@@ -13,7 +13,7 @@
 </ul>
 <% } %>
 
-<form id="updateForm" action="/inv/update-vehicle" method="post">
+<form id="updateForm1" action="/inv/update-vehicle" method="post">
     <p>
         <label>Classification</label>
         <%- dropdown %>
@@ -128,7 +128,7 @@
             value="<%= locals.inv_color %>"
         >
     </p>
-    <button type="submit" disabled>Update Vehicle</button>
+    <button id="button1" type="submit" disabled>Update Vehicle</button>
 
     <input type="hidden" name="inv_id"
     <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
