@@ -462,7 +462,6 @@ nav ul li a:hover {
 }
 
 #form2 {
-  display: absolute;
   background-color: var(--blueish);
   padding: 10px;
   margin-top: 10px;
@@ -478,6 +477,24 @@ nav ul li a:hover {
 
 #updatepass {
   color: var(--white);
+}
+
+/* Logged in account management view */
+#loginmessage {
+  color: var(--warning);
+}
+
+#loginmanagement, #welcomelogin {
+  background-color: var(--blueish);
+  padding: 15px;
+}
+
+#loginmanagement a {
+  color: var(--white);
+}
+
+#welcomelogin a {
+  color: var(--white)
 }
 
 /* -------------LARGE VIEW----------- */
