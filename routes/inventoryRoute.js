@@ -42,7 +42,6 @@ router.get("/trigger-error",
 // Process route and return data as JSON
 router.get("/getInventory/:classification_id", 
     invValidate.inventoryRules(),
-    invValidate.checkVehicleData,
     utilities.handleErrors(invCont.getInventoryJSON));
 
 // Route to show edit page view

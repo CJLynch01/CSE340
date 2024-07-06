@@ -139,14 +139,14 @@ async function accountLogin(req, res) {
 async function editLoginInfo(req, res) {
   let nav = await utilities.getNav()
   account_id = req.params.account_id
-  const accountinfo = await accountModel.getAccountById(account_id)
+  const accountData = await accountModel.getAccountById(account_id)
   res.render("account/edit-account", {
     title: "Edit Account",
     nav,
     errors: null,
-    account_firstname: accountinfo.account_firstname,
-    account_lastname: accountinfo.account_lastname,
-    account_email: accountinfo.account_email,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
   })
 }
 
@@ -155,8 +155,8 @@ async function editLoginInfo(req, res) {
  * ************************************ */
 async function editinformation(req, res) {
   let nav = await utilities.getNav()
-  const { account_firstname, account_lastname, account_email, account_id } = req.body;
-  const accountinfo = await accountModel.getAccountById(account_id);
+  const { account_firstname, account_lastname, account_email, account_password, account_id } = req.body;
+  const accountData = await accountModel.getAccountById(account_id);
   const updateInformation = await accountModel.updateInformation( account_firstname, account_lastname, account_email, account_id,)
 
   if (updateInformation) {
@@ -188,9 +188,9 @@ async function editinformation(req, res) {
       title: "Edit Account",
       nav,
       errors: null,
-      account_firstname: accountinfo.account_firstname,
-      account_lastname: accountinfo.account_lastname,
-      account_email: accountinfo.account_email,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
     })
   }
 }
@@ -201,7 +201,7 @@ async function editinformation(req, res) {
  async function editPassword (req, res) {
   let nav = await utilities.getNav();
   const { account_id, account_password } = req.body;
-  const accountinfo = await accountModel.getAccountById(account_id);
+  const accountData = await accountModel.getAccountById(account_id);
 
   const hashedPassword = bcrypt.hashSync(account_password, 10);
 
@@ -220,9 +220,9 @@ async function editinformation(req, res) {
       title: "Edit Account",
       nav,
       errors: null,
-      account_firstname: accountinfo.account_firstname,
-      account_lastname: accountinfo.account_lastname,
-      account_email: accountinfo.account_email,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
     });
   }
 };

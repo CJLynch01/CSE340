@@ -447,7 +447,38 @@ nav ul li a:hover {
   font-weight: bold;
 }
 
+/* Edit Info/Password */
+#form1 {
+  background-color: var(--blueish);
+  padding: 10px;
+}
 
+#updateform1 {
+  padding: 15px;
+}
+
+#updateform1 div {
+  padding: 10px;
+}
+
+#form2 {
+  display: absolute;
+  background-color: var(--blueish);
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#updateform2 {
+  padding: 15px;
+}
+
+#updateform2 div {
+  padding: 10px;
+}
+
+#updatepass {
+  color: var(--white);
+}
 
 /* -------------LARGE VIEW----------- */
 

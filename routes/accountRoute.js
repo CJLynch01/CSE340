@@ -35,7 +35,8 @@ router.get("/logout",
     utilities.handleErrors(accountController.accountLogout))
 
 // Process account edit view
-router.get("/edit-account/:accountId", utilities.handleErrors(accountController.editLoginInfo))
+router.get("/edit-account/:account_id", 
+    utilities.handleErrors(accountController.editLoginInfo))
 
 // Process account edit account data
 router.post("/edit-information", 
