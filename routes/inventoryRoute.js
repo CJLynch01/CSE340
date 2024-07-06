@@ -14,17 +14,22 @@ router.get("/detail/:inventoryId",
 
 // Route for management view
 router.get("/", 
+    utilities.checkEmployeeStatus,
     utilities.handleErrors(invCont.management));
 
 // Route for add classification view
 router.get("/add-classification", 
+    utilities.checkEmployeeStatus,
     utilities.handleErrors(invCont.newclassification));
 
 router.post("/add-classification",
+    invValidate.classificationRules(),
+    invValidate.checkClassificationName,
     utilities.handleErrors(invCont.processclassification));
 
 // Route for add inventory view
 router.get("/add-inventory", 
+    utilities.checkEmployeeStatus,
     utilities.handleErrors(invCont.addinventory));
 
 router.post("/add-inventory", 
@@ -36,17 +41,23 @@ router.get("/trigger-error",
 
 // Process route and return data as JSON
 router.get("/getInventory/:classification_id", 
+    invValidate.inventoryRules(),
+    invValidate.checkVehicleData,
     utilities.handleErrors(invCont.getInventoryJSON));
 
 // Route to show edit page view
 router.get("/edit/:inv_id",
+    utilities.checkEmployeeStatus,
     utilities.handleErrors(invCont.showeditpage));
 
 router.post("/update-vehicle", 
+    invValidate.inventoryRules(),
+    invValidate.checkUpdateData,
     utilities.handleErrors(invCont.updateInventory));
 
 //Route to show delete view
 router.get("/delete/:inv_id",
+    utilities.checkEmployeeStatus,
     utilities.handleErrors(invCont.showdeletepage));
 
 router.post("/delete-vehicle",

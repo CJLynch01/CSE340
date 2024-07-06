@@ -22,14 +22,29 @@ router.get("/register",
 router.post("/register", 
     regValidate.registrationRules(),
     regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount)
-)
+    utilities.handleErrors(accountController.registerAccount))
 
 // Process the login attempt
 router.post("/login",
     regValidate.loginRules(),
     regValidate.checkLoginData,
-    utilities.handleErrors(accountController.accountLogin)
-)
+    utilities.handleErrors(accountController.accountLogin))
+
+//Process logout attempt
+router.get("/logout",
+    utilities.handleErrors(accountController.accountLogout))
+
+// Process account edit view
+router.get("/edit-account/:accountId", utilities.handleErrors(accountController.editLoginInfo))
+
+// Process account edit account data
+router.post("/edit-information", 
+  regValidate.registrationRules(),
+  utilities.handleErrors(accountController.editinformation))
+
+// Process account edit password
+router.post("/edit-password",
+  regValidate.loginRules(),
+  utilities.handleErrors(accountController.editPassword))
 
 module.exports = router;
