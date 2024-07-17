@@ -45,7 +45,7 @@ router.post("/edit-information",
 
 // Process account edit password
 router.post("/edit-password",
-  regValidate.loginRules(),
+  regValidate.passwordRules(),
   utilities.handleErrors(accountController.editPassword))
 
 // Build review edit view

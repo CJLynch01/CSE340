@@ -48,7 +48,6 @@ async function getAccountById(account_id) {
       "SELECT account_id, account_firstname, account_lastname, account_email, account_type FROM account WHERE account_id = $1",
       [account_id]
     );
-    // console.log(result.rows[0])
     return result.rows[0];
   } catch (error) {
     return new Error("No matching account found");
@@ -58,26 +57,16 @@ async function getAccountById(account_id) {
 /* *****************************
 * Update account information
 * ***************************** */
-async function updateInformation (
-account_firstname,
-account_lastname,
-account_email,
-account_id,
-) {
-try {
-  const sql =
-    "UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *";
-  const result = await pool.query(sql, [
-    account_firstname,
-    account_lastname,
-    account_email,
-    account_id,
-  ]);
-  return result.rows[0];
-} catch (error) {
-  console.log("Account wasn't updated.")
-  return error.message;
-}
+async function updateInformation (account_firstname, account_lastname, account_email, account_id) {
+  try {
+    const sql =
+      "UPDATE public.account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *";
+    const result = await pool.query(sql, [account_firstname, account_lastname, account_email, account_id,]);
+    return result.rows[0];
+  } catch (error) {
+    console.log("Account wasn't updated.")
+    return error.message;
+  }
 }
 
 /* *****************************

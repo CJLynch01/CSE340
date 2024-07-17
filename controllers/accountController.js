@@ -156,47 +156,122 @@ async function editLoginInfo(req, res) {
  /* ****************************************
  *  Process update information request
  * ************************************ */
-async function editinformation(req, res) {
+async function editinformation(req, res, next) {
   let nav = await utilities.getNav()
-  const { account_firstname, account_lastname, account_email, account_password, account_id } = req.body;
-  const accountData = await accountModel.getAccountById(account_id);
+  const { account_firstname, account_lastname, account_email, account_id } = req.body;
   const updateInformation = await accountModel.updateInformation( account_firstname, account_lastname, account_email, account_id,)
+  const accountData = await accountModel.getAccountById(account_id);
 
   if (updateInformation) {
-    req.flash(
-      "notice",
-      `Congratulations, ${account_firstname}. You have updated your account.`
-    )
-    res.clearCookie("jwt")
-    const updatedInformation = await accountModel.getAccountById(account_id);
-    delete updatedInformation.account_password;
-    const accessToken = jwt.sign(
-        updatedInformation,
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: 3600 }
-    );
-    if (process.env.NODE_ENV === "development") {
-        res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
-    } else {
-        res.cookie("jwt", accessToken, {
-            httpOnly: true,
-            secure: true,
-            maxAge: 3600 * 1000,
-        })
+    try {
+        delete accountData.account_password
+        const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
+
+        if (process.env.NODE_ENV === 'development') {
+            res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+        } else{
+            res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+        }
+        
+    } catch (error) {
+        return new Error('Access Forbidden')
     }
-    res.status(201).redirect("/account/");
-} else {
-    req.flash("notice", "Sorry, the account update failed.");
-    res.status(501).render("account/edit-account", {
-      title: "Edit Account",
-      nav,
-      errors: null,
-      account_firstname: accountData.account_firstname,
-      account_lastname: accountData.account_lastname,
-      account_email: accountData.account_email,
+    req.flash('notice', 'Congratulations, your information has been updated')
+    res.status(201).redirect('/account/')
+} else{
+    req.flash('notice', 'Sorry the updating process failed')
+    res.status(501).render('account/edit-account',{
+        title: 'Edit Account',
+        errors: null,
+        nav,
+        account_firstname: accountData.account_firstname,
+        account_lastname: accountData.account_lastname,
+        account_email: accountData.account_email,
     })
-  }
 }
+}
+
+//   if (updateInformation) {
+//     req.flash(
+//       "notice",
+//       `Congratulations, ${account_firstname}. You have updated your account.`
+//     )
+//     res.clearCookie("jwt")
+//     const updatedInformation = await accountModel.getAccountById(account_id);
+//     delete updatedInformation.account_password;
+//     const accessToken = jwt.sign(
+//         updatedInformation,
+//         process.env.ACCESS_TOKEN_SECRET,
+//         { expiresIn: 3600 }
+//     );
+//     if (process.env.NODE_ENV === "development") {
+//         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+//     } else {
+//         res.cookie("jwt", accessToken, {
+//             httpOnly: true,
+//             secure: true,
+//             maxAge: 3600 * 1000,
+//         })
+//     }
+//     res.status(201).redirect("/account/");
+// } else {
+//     req.flash("notice", "Sorry, the account update failed.");
+//     res.status(501).render("account/edit-account", {
+//       title: "Edit Account",
+//       nav,
+//       errors: null,
+//       account_firstname: accountData.account_firstname,
+//       account_lastname: accountData.account_lastname,
+//       account_email: accountData.account_email,
+//     })
+//   }
+// }
+
+// /* ****************************************
+//  *  Process update information request
+//  * ************************************ */
+// async function editinformation(req, res) {
+//   let nav = await utilities.getNav();
+//   const { account_firstname, account_lastname, account_email, account_id } = req.body;
+
+//   // Update account information in the database
+//   const updateInformation = await accountModel.updateInformation(account_firstname, account_lastname, account_email, account_id);
+
+//   if (!updateInformation) {
+//     req.flash("notice", "Sorry, the account update failed.");
+//     const accountData = await accountModel.getAccountById(account_id);
+//     return res.status(501).render("account/edit-account", {
+//       title: "Edit Account",
+//       nav,
+//       errors: "Failed to update account information",
+//       account_firstname: accountData.account_firstname,
+//       account_lastname: accountData.account_lastname,
+//       account_email: accountData.account_email,
+//     });
+//   }
+
+//   // Retrieve updated account data after successful update
+//   const updatedInformation = await accountModel.getAccountById(account_id);
+//   delete updatedInformation.account_password; // Remove sensitive information
+
+//   // Sign a new JWT token with updated account information
+//   const accessToken = jwt.sign(
+//     { ...updatedInformation }, // Ensure updatedInformation is a plain object
+//     process.env.ACCESS_TOKEN_SECRET,
+//     { expiresIn: 3600 }
+//   );
+
+//   // Set the JWT cookie based on environment
+//   if (process.env.NODE_ENV === 'development') {
+//     res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+//   } else {
+//     res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 });
+//   }
+
+//   // Redirect to account management page after successful update
+//   req.flash("notice", `Congratulations, ${account_firstname}. You have updated your account.`);
+//   res.status(201).redirect("/account/");
+// }
 
  /* ****************************************
  *  Process login request

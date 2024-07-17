@@ -33,7 +33,7 @@
         <div id="updateinfo">
             <button id="button2" type="submit" disabled>Update</button>
             <input type="hidden" name="account_id"
-            <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+            <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>"
             <% } %>>
         </div>
     </form>
@@ -63,7 +63,7 @@
         <div id="regbtn">
             <button id="button3" type="submit" disabled>Update</button>
             <input type="hidden" name="account_id"
-            <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+            <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>"
             <% } %>>
         </div>
     </form>
