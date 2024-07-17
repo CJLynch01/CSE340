@@ -281,14 +281,14 @@ async function editReview (req, res) {
   let reviewsData = await accountModel.getReviewsByAccountId(
     res.locals.accountData.account_id
   );
-  let reviews = await utilities.buildAccountReviews(reviewsData.rows, res);
+  let reviews = await utilities.buildClientReviews(reviewsData.rows, res);
 
   if (updateResult) {
     req.flash("notice", "Congratulations, your review has been updated.");
     res.status(201).render("account/management", {
       title: "Account Management",
       nav,
-      reviews,
+      review,
       errors: null,
     });
   } else {
@@ -353,32 +353,31 @@ async function deleteReview (req, res) {
     month: "long",
     day: "numeric",
   });
+
+  const inventory = await invModel.getInventoryByID(review.inv_id);
   const deleteResult = await accountModel.deleteReview(review_id);
 
-  let reviewsData = await accountModel.getReviewsByAccountId(
-    res.locals.accountData.account_id
-  );
-  let reviews = await utilities.buildAccountReviews(reviewsData.rows, res);
+  if (deleteResult.rowCount) {
+    let reviewsData = await accountModel.getReviewsByAccountId(res.locals.accountData.account_id);
+    let review = await utilities.buildClientReviews(reviewsData.rows, res);
 
-  if (deleteResult) {
     req.flash("notice", "Your review has been deleted.");
     res.status(201).render("account/management", {
       title: "Account Management",
       nav,
-      reviews,
-      formattedDate,
+      review,
       errors: null,
     });
   } else {
     req.flash("notice", "Sorry, the review delete failed.");
-    res.status(501).render("account/deleteReview", {
+    res.status(501).render("account/delete-review", {
       title:
         "Delete " +
-        inventory.inventory_year +
+        inventory.inv_year +
         " " +
-        inventory.inventory_make +
+        inventory.inv_make +
         " " +
-        inventory.inventory_model +
+        inventory.inv_model +
         " Review",
       nav,
       review,
