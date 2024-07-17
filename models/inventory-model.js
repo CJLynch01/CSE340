@@ -137,4 +137,35 @@ async function processdelete(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID, addinventory, addclassification, updateInventory, processdelete}
+/* ***************************
+ * Add review
+ * **********************/
+async function addReview(review_text, inv_id, account_id) {
+  try {
+    const sql = `INSERT INTO public.review (review_text, inv_id, account_id) VALUES ($1, $2, $3)`;
+    const data = await pool.query(sql, [
+      review_text,
+      inv_id,
+      account_id,
+    ]);
+    return data.rows;
+  } catch (error) {
+    console.error("addReview error " + error);
+  }
+}
+
+/* ***************************
+ * Get review
+ * **********************/
+async function getReviewsByInventoryId(inv_id) {
+  try {
+    const sql = `SELECT review.review_text, review.review_date, review.account_id, inventory.inv_make, inventory.inv_model FROM review JOIN inventory ON review.inv_id = inventory.inv_id WHERE review.inv_id = $1`;
+    const data = await pool.query(sql, [inv_id]);
+    console.log("get reviews by inventory id data: ", data.rows);
+    return data.rows;
+  } catch (error) {
+    console.error("getReviewsByInventoryId error " + error);
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByID, addinventory, addclassification, updateInventory, processdelete, addReview, getReviewsByInventoryId}

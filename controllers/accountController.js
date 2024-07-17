@@ -1,5 +1,6 @@
 const utilities = require("../utilities/");
 const accountModel = require("../models/account-model")
+const invModel = require("../models/inventory-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -36,10 +37,12 @@ async function buildRegister(req, res, next) {
 * *************************************** */
 async function getAccountManagementView(req, res, next) {
   let nav = await utilities.getNav();
-  req.flash("notice", "This is a flash message.");
+  let reviewdata = await accountModel.getReviewsByAccountId(res.locals.accountData.account_id)
+  let review = await utilities.buildClientReviews(reviewdata.rows, res)
   res.render("account/management", {
     title: "Management Inventory",
     nav,
+    review,    
     errors: null,
   });
 }
@@ -206,12 +209,15 @@ async function editinformation(req, res) {
   const hashedPassword = bcrypt.hashSync(account_password, 10);
 
   const updateResult = await accountModel.updatePassword(account_id, hashedPassword);
+  let reviewdata = await accountModel.getReviewsByAccountId(res.locals.accountData.account_id);
+  let review = await utilities.buildClientReviews(reviewdata.rows, res);
 
   if (updateResult) {
     req.flash("notice", "Congratulations, your password has been updated.");
     res.status(201).render("account/management", {
       title: "Account Management",
       nav,
+      review,
       errors: null,
     });
   } else {
@@ -227,4 +233,159 @@ async function editinformation(req, res) {
   }
 };
 
-  module.exports = { buildLogin, buildRegister, registerAccount, getAccountManagementView, accountLogin, accountLogout, editLoginInfo, editinformation, editPassword }
+/* ****************************************
+ *  Build review edit view
+ * *************************************** */
+async function buildEditReview (req, res) {
+  let nav = await utilities.getNav();
+  let review_id = req.params.review_id;
+  const reviewData = await accountModel.getReviewById(review_id);
+  let review = reviewData.rows[0];
+  let formattedDate = review.review_date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  let inventory = await invModel.getInventoryByID(review.inv_id);
+  res.render("account/edit-review", {
+    title:
+      "Edit " +
+      inventory.inv_year +
+      " " +
+      inventory.inv_make +
+      " " +
+      inventory.inv_model +
+      " Review",
+    nav,
+    review,
+    formattedDate,
+    errors: null,
+  });
+};
+
+/* ****************************************
+ *  Process review edit
+ * *************************************** */
+async function editReview (req, res) {
+  let nav = await utilities.getNav();
+  const { review_id, review_text } = req.body;
+  const reviewData = await accountModel.getReviewById(review_id);
+  let review = reviewData.rows[0];
+  let formattedDate = review.review_date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const updateResult = await accountModel.updateReview(review_id, review_text);
+
+  let reviewsData = await accountModel.getReviewsByAccountId(
+    res.locals.accountData.account_id
+  );
+  let reviews = await utilities.buildAccountReviews(reviewsData.rows, res);
+
+  if (updateResult) {
+    req.flash("notice", "Congratulations, your review has been updated.");
+    res.status(201).render("account/management", {
+      title: "Account Management",
+      nav,
+      reviews,
+      errors: null,
+    });
+  } else {
+    req.flash("notice", "Sorry, the review update failed.");
+    res.status(501).render("account/edit-review", {
+      title:
+        "Edit " +
+        inventory.inv_year +
+        " " +
+        inventory.inv_make +
+        " " +
+        inventory.inv_model +
+        " Review",
+      nav,
+      review,
+      formattedDate,
+      errors: null,
+    });
+  }
+};
+
+/* ****************************************
+ *  Build review delete view
+ * *************************************** */
+async function buildDeleteReview(req, res) {
+  let nav = await utilities.getNav();
+  let review_id = req.params.review_id;
+  const reviewData = await accountModel.getReviewById(review_id);
+  let review = reviewData.rows[0];
+  let formattedDate = review.review_date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  let inventory = await invModel.getInventoryByID(review.inv_id);
+  res.render("account/delete-review", {
+    title:
+      "Delete " +
+      inventory.inv_year +
+      " " +
+      inventory.inv_make +
+      " " +
+      inventory.inv_model +
+      " Review",
+    nav,
+    review,
+    formattedDate,
+    errors: null,
+  });
+};
+
+/* ****************************************
+ *  Process review delete
+ * *************************************** */
+async function deleteReview (req, res) {
+  let nav = await utilities.getNav();
+  const { review_id } = req.body;
+  const reviewData = await accountModel.getReviewById(review_id);
+  let review = reviewData.rows[0];
+  let formattedDate = review.review_date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const deleteResult = await accountModel.deleteReview(review_id);
+
+  let reviewsData = await accountModel.getReviewsByAccountId(
+    res.locals.accountData.account_id
+  );
+  let reviews = await utilities.buildAccountReviews(reviewsData.rows, res);
+
+  if (deleteResult) {
+    req.flash("notice", "Your review has been deleted.");
+    res.status(201).render("account/management", {
+      title: "Account Management",
+      nav,
+      reviews,
+      formattedDate,
+      errors: null,
+    });
+  } else {
+    req.flash("notice", "Sorry, the review delete failed.");
+    res.status(501).render("account/deleteReview", {
+      title:
+        "Delete " +
+        inventory.inventory_year +
+        " " +
+        inventory.inventory_make +
+        " " +
+        inventory.inventory_model +
+        " Review",
+      nav,
+      review,
+      formattedDate,
+      errors: null,
+    });
+  }
+}
+
+  module.exports = { buildLogin, buildRegister, registerAccount, getAccountManagementView, accountLogin, accountLogout, editLoginInfo, editinformation, editPassword, buildEditReview, editReview, buildDeleteReview, deleteReview }

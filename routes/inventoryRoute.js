@@ -62,4 +62,8 @@ router.get("/delete/:inv_id",
 router.post("/delete-vehicle",
     utilities.handleErrors(invCont.processdelete));
 
+// Route for adding a review
+router.post("/review/:inventoryId", 
+    utilities.handleErrors(invCont.addReview));
+
 module.exports = router;

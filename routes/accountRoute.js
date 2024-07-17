@@ -48,4 +48,21 @@ router.post("/edit-password",
   regValidate.loginRules(),
   utilities.handleErrors(accountController.editPassword))
 
+// Build review edit view
+router.get("/edit-review/:review_id", 
+    utilities.handleErrors(accountController.buildEditReview))
+
+// Process review edit
+router.post("/edit-review",
+  regValidate.reviewRules(),
+  utilities.handleErrors(accountController.editReview))
+
+// Build review delete view
+router.get("/delete-review/:review_id", 
+    utilities.handleErrors(accountController.buildDeleteReview))
+
+// Process review delete
+router.post("/delete-review", 
+    utilities.handleErrors(accountController.deleteReview))
+
 module.exports = router;

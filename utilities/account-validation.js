@@ -116,5 +116,20 @@ validate.checkLoginData = async (req, res, next) => {
   }
   next();
 };
+
+/* ******************************
+ * Review Rules
+ * ***************************** */
+validate.reviewRules = () => {
+  return [
+    // review is required and must be string
+    body("review")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a review."), // on error this message is sent.
+  ];
+}
   
   module.exports = validate

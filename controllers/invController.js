@@ -29,10 +29,18 @@ invCont.buildByInventoryId = async function (req, res, next) {
   const data = await invModel.getInventoryByID(inventory_id)
   const grid = await utilities.buildItemGrid(data)
   let nav = await utilities.getNav()
+
+  // reviews
+  let reviewdata = await invModel.getReviewsByInventoryId(inventory_id)
+  let review = await utilities.buildReviews(reviewdata)
+
   res.render("./inventory/detail", {
     title: data.inv_year + ' ' + data.inv_make + ' ' + data.inv_model,
     nav,
     grid,
+    reviewdata,
+    review,
+    inv_id: inventory_id,
     errors: null,
   })
 }
@@ -43,6 +51,10 @@ invCont.buildByInventoryId = async function (req, res, next) {
 invCont.management = async function (req, res, next) {
   let nav = await utilities.getNav()
   const classificationSelect = await utilities.buildClassificationList()
+
+  let reviewdata = await invModel.getReviewsByInventoryId(inventory_id)
+  let review = await utilities.buildReviews(reviewdata)
+
   req.flash("notice", "This is a flash message.");
   res.render("./inventory/management", {
     title: "Inventory Management",
@@ -294,6 +306,35 @@ invCont.processdelete = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ * Add a review
+ * ************************** */
+invCont.addReview = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let { review_text, inv_id, account_id } = req.body;
+  let result = await invModel.addReview(review_text, inv_id, account_id)
+
+  const singlepagedata = await invModel.getInventoryByID(inv_id)
+  const singlepageview = await utilities.buildItemGrid(singlepagedata)
+  const reviewdata = await invModel.getReviewsByInventoryId(inv_id)
+  const review = await utilities.buildReviews(reviewdata, res)
+
+  if (result) {
+    req.flash("notice", "Review added.");
+    res.redirect("/inv/detail/" + inv_id);
+  } else {
+    req.flash("notice", "Sorry, the review failed.");
+    res.status(501).render("./inventory/detail", {
+      title: singlepagedata.inv_make + " " + singlepagedata.inv_model,
+      nav,
+      inv_id,
+      singlepageview,
+      reviewdata,
+      review,
+      errors: null,
+    });
+  }
+};
 
 // Build Error
 errormess.buildError = (req, res, next) => {

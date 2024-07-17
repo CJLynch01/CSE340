@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
@@ -168,4 +169,55 @@ Util.checkEmployeeStatus = (req, res, next) => {
   }
 }
 
+/* ****************************************
+ * Build review
+ **************************************** */
+Util.buildReviews = async function (data) {
+  let reviews = "<ul class='reviews'>";
+
+  for (const review of data) {
+    let accountData = await accountModel.getAccountById(review.account_id);
+    let screenName = accountData.account_firstname[0] + ' ' + accountData.account_lastname;
+    let formattedDate = review.review_date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    reviews += "<li>";
+    reviews += "<h3>" + screenName + "wrote on " + formattedDate + "</h3>";
+    reviews += "<p>" + review.review_text + "</p>";
+    reviews += "</li>";
+  }
+
+  reviews += "</ul>";
+  return reviews;
+};
+
+/* ****************************************
+ * Build client/manage review
+ **************************************** */
+Util.buildClientReviews = async function (reviewsData, res) {
+  let reviews = "<ul class='reviewList'>";
+  for (const review of reviewsData) {
+    let accountData = res.locals.accountData;
+    let screenName =
+      accountData.account_firstname[0] +
+      " " +
+      accountData.account_lastname;
+    let formattedDate = review.review_date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    reviews += "<li>";
+    reviews += `<h3>${screenName} reviewed the ${review.inv_year} ${review.inv_make} ${review.inv_model} on ${formattedDate}</h3>`;
+    reviews += `<a href="/account/edit-review/${review.review_id}">| Edit |</a>`;
+    reviews += `<a href="/account/delete-review/${review.review_id}"> Delete | </a>`;
+    reviews += "</li>";
+  }
+  
+  reviews += "</ul>";
+  return reviews;
+}
 module.exports = Util
