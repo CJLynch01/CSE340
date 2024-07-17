@@ -20,7 +20,7 @@
   --footer: "Rubik", sans-serif;
 }
 
-/* ----------MOBILE VIEW------------ */
+/* ----------------------------------------------------------MOBILE VIEW-------------------------------------------------- */
 
 /* Home Page */
 
@@ -395,6 +395,27 @@ nav ul li a:hover {
   color: var(--white);
 }
 
+/* Management View */
+#managereview {
+  background-color: var(--blueish);
+  padding: 15px;
+  font-size: 10px;
+}
+
+#managereview a {
+  color: var(--white);
+}
+
+#managereview li {
+  list-style-type: decimal;
+}
+
+#managereview li::marker {
+  color: var(--white);
+  font-weight: bold;
+  font-size: 18px;
+}
+
 /* Add Classification View */
 .add-class-form label input,
 .add-class-form label select {
@@ -497,7 +518,35 @@ nav ul li a:hover {
   color: var(--white)
 }
 
-/* -------------LARGE VIEW----------- */
+/* Edit Review View */
+#editreviewform {
+  text-align: center;
+  background-color: var(--blueish);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#editreviewform div {
+  padding: 5px;
+}
+
+/* Delete Review View */
+#deletereviewform {
+  text-align: center;
+  background-color: var(--blueish);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#deletereviewform div {
+  padding: 5px;
+}
+
+#warning {
+  color: var(--warning);
+}
+
+/* -----------------------------------------------------LARGE VIEW---------------------------------------------- */
 
 
 @media (min-width: 600px) {
