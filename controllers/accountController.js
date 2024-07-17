@@ -278,12 +278,11 @@ async function editReview (req, res) {
   });
   const updateResult = await accountModel.updateReview(review_id, review_text);
 
-  let reviewsData = await accountModel.getReviewsByAccountId(
-    res.locals.accountData.account_id
-  );
-  let reviews = await utilities.buildClientReviews(reviewsData.rows, res);
-
   if (updateResult) {
+    let reviewsData = await accountModel.getReviewsByAccountId(res.locals.accountData.account_id);
+    let review = await utilities.buildClientReviews(reviewsData.rows, res);
+
+
     req.flash("notice", "Congratulations, your review has been updated.");
     res.status(201).render("account/management", {
       title: "Account Management",
