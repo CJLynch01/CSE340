@@ -185,8 +185,8 @@ Util.buildReviews = async function (data) {
     });
 
     reviews += "<li>";
-    reviews += "<h3>" + screenName + "wrote on " + formattedDate + "</h3>";
-    reviews += "<p>" + review.review_text + "</p>";
+    reviews += "<h3>" + screenName + " wrote on " + formattedDate + "</h3>";
+    reviews += "<p id='clientreview'>" + review.review_text + "</p>";
     reviews += "</li>";
   }
 

@@ -9,6 +9,7 @@
   --p: #0033FF;
   --warning: red;
   --transparent: rgba(255, 255, 255, .8);
+  --hightlight: yellow;
 
 /* Fonts */
 
@@ -516,6 +517,38 @@ nav ul li a:hover {
 
 #welcomelogin a {
   color: var(--white)
+}
+
+/* No Reviews View */
+#noreviews {
+  background-color: var(--hightlight);
+}
+
+/* Reviews */
+#readreview {
+  background-color: var(--blueish);
+  padding: 15px;
+  
+}
+
+#readreviewheading {
+  text-align: center;
+}
+
+#clientreview {
+  color: var(--white)
+}
+
+/* Add Review View */
+#reviewmanagementview {
+  background-color: var(--blueish);
+  text-align: center;
+  padding: 15px;
+  margin-top: 25px;
+}
+
+#reviewmanagementview div {
+  padding: 10px;
 }
 
 /* Edit Review View */
