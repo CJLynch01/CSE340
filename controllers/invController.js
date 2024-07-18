@@ -30,7 +30,6 @@ invCont.buildByInventoryId = async function (req, res, next) {
   const grid = await utilities.buildItemGrid(data)
   let nav = await utilities.getNav()
 
-  // reviews
   let reviewdata = await invModel.getReviewsByInventoryId(inventory_id)
   let review = await utilities.buildReviews(reviewdata)
 
@@ -51,9 +50,6 @@ invCont.buildByInventoryId = async function (req, res, next) {
 invCont.management = async function (req, res, next) {
   let nav = await utilities.getNav()
   const classificationSelect = await utilities.buildClassificationList()
-
-  let reviewdata = await invModel.getReviewsByInventoryId(inventory_id)
-  let review = await utilities.buildReviews(reviewdata)
 
   req.flash("notice", "This is a flash message.");
   res.render("./inventory/management", {
