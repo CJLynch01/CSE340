@@ -40,9 +40,9 @@ Util.buildClassificationGrid = async function(data){
         + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
         + 'details"><img src="' + vehicle.inv_thumbnail 
         +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-        +' on CSE Motors" /></a>'
+        +' on CSE Motors"></a>'
         grid += '<div class="namePrice">'
-        grid += '<hr />'
+        grid += '<hr>'
         grid += '<h2>'
         grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
@@ -67,8 +67,8 @@ Util.buildItemGrid = async function(data){
   let grid
   if(data != null){
     grid = '<div id="vehicle-display">'
-    grid += '<img id="vehicle-img" src="' + data.inv_image + ' "alt="Image of '+ data.inv_make + ' ' + data.inv_model 
-        +' on CSE Motors" />'
+    grid += '<img id="vehicle-img" src="' + data.inv_image + ' " alt="Image of '+ data.inv_make + ' ' + data.inv_model 
+        +' on CSE Motors">'
     grid += '<h2 id="vehicle-title">' + data.inv_make + ' ' + data.inv_model + ' Details'
     grid += '<h3 id="vehicle-price">Price: $' + new Intl.NumberFormat('en-US').format(data.inv_price) + '</h3>'
     grid += '<div id="vehicle-description"><h3>Description: </h3><p>' + data.inv_description + '</p></div>'

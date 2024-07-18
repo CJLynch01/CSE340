@@ -450,19 +450,42 @@ nav ul li a:hover {
   color: var(--white);
 }
 
+.add-class-form {
+  background-color: var(--blueish);
+  padding: 10px;
+}
+
 /* Add Inventory View */
 #addinventoryform {
+  background-color: var(--blueish);
+  text-align: center;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#class1, #class3, #class5, #class7, #class9, #class11, #class13, #class15, #class17, #class19 {
+  padding-top: 20px;
+}
+
+#class1button {
+  padding-top: 20px;
+}
+
+/* Edit View */
+#updateForm1 {
+  text-align: center;
   background-color: var(--blueish);
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-/* Edit View */
-#updateForm1 {
-  background-color: var(--blueish);
-  padding-left: 15px;
-  padding-top: 10px;
+#editbutton {
+  padding-top: 25px;
+}
+
+#id1, #id2, #id3, #id4, #id5, #id6, #id7, #id8, #id9 {
   padding-bottom: 10px;
 }
 
@@ -472,11 +495,20 @@ nav ul li a:hover {
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
+  text-align: center;
 }
 
 #deleteconfirm {
   color: var(--warning);
   font-weight: bold;
+}
+
+#deletesubmitbttn {
+  padding-top: 25px;
+}
+
+#delete1, #delete2, #delete3 {
+  padding-bottom: 10px;
 }
 
 /* Edit Info/Password */
